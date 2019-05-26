@@ -68,15 +68,14 @@ public class AddClients extends Activity {
         buy_details=(EditText)findViewById(R.id.buy_details);
         //--------- Set Data
         setData();
-        //----------- Test Client
-
+        /*----------- Test Client
         if (ls_username.equals("test")) {
             phone.setText(ls_phone_test);
             phone.setEnabled(false);
             buy_details.setText("تحت الاختبار");
             buy_details.setEnabled(false);
         }
-
+        */
 
         //------ Calc Total
         buy.addTextChangedListener(new TextWatcher() {

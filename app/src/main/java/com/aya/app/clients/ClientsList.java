@@ -40,8 +40,7 @@ public class ClientsList extends Activity {
     DatabaseReference   databaseReference;
     List<DataClients> list_dataclients  ;
     ArrayList<String> arrayList_data   ;
-    int                     client_test ;
-    @Override
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.clientslist);
@@ -123,15 +122,11 @@ public class ClientsList extends Activity {
         add_button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (client_test>= 1 ) {
-                    alartTest();
-
-                }else {
                     Intent intent = new Intent(getApplicationContext(), AddClients.class);
                     intent.putExtra("username", ls_username);
                     intent.putExtra("phone", ls_phone);
                     startActivity(intent);
-                }
+
             }
         });
 
@@ -153,11 +148,7 @@ public class ClientsList extends Activity {
                     arrayList_data.add(client.getClient_name());
                     hashMap_position.put(client.getClient_name(),i);
                     i++;
-                    if ( ls_username.equals("test")) {
-                        if (ls_phone.equals(client.getUser_phone())) {
-                            client_test++;
-                        }
-                    }
+
                 }
 
 

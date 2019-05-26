@@ -40,8 +40,7 @@ public class ClientsDetails extends Activity {
     private String ls_id_client ,ls_last_date;
     ListView list_view;
     private String ls_remainded;
-    int             client_paid ;
-    @Override
+     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.customer_detail);
@@ -73,20 +72,10 @@ public class ClientsDetails extends Activity {
         //-------Database Firebase
         databaseReference = FirebaseDatabase.getInstance().getReference(databasename).child(ls_id_client);
         databaseReference.keepSynced(true);
-        //--------
-        if (ls_username.equals("test")) {
-            if (client_paid >= 2){
-
-                alartTest();
-            }
-        }
         //---------
         new_paid.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (client_paid >= 2 &&ls_username.equals("test") ){
-                    alartTest();}
-                else {
                     Intent intent = new Intent(getApplicationContext(), ClientsPaid.class);
                     intent.putExtra("username", ls_username);
                     intent.putExtra("clientname", ls_clientname);
@@ -94,7 +83,6 @@ public class ClientsDetails extends Activity {
                     intent.putExtra("card", ls_card);
                     intent.putExtra("clientid", ls_id_client);
                     startActivity(intent);
-                }
             }
         });
 
@@ -213,7 +201,7 @@ public class ClientsDetails extends Activity {
                     DataPaid client  = datapaid.getValue(DataPaid.class);
                     //    Toast.makeText(ClientsList.this, client.getUser_Name(), Toast.LENGTH_SHORT).show();
                     list_dataclients.add(client);
-                    client_paid++;
+
                 }
                 ListViewAdapterClientTracks adapter = new ListViewAdapterClientTracks(ClientsDetails.this, list_dataclients ,ls_username ,ls_id_client , ls_phone , ls_card);
                 list_view.setAdapter(adapter);
