@@ -44,6 +44,7 @@ public class Login extends Activity {
     List<DataUsers> list_datausers;
     private String databasename;
     private int height_start , height_Privacy , height_Login, height_add_client , height_contact_us , height_recordclients , height_search;
+    private boolean check;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,6 +65,11 @@ public class Login extends Activity {
             @Override
             public void onClick(View view) {
                 setData();
+                if (checkNetwork()){
+                 Snackbar.make(view, "عذرا, يجب الاتصال بالانترنت لتتمكن من تسجيل الدخول", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+
+                }
+                else{
                 //  Toast.makeText(Login.this,ls_username, Toast.LENGTH_SHORT).show();
                 if (ls_username.isEmpty()) {
                     Toast.makeText(Login.this, "من فضلك قم بإدخال اسم المستخدم الخاص بك", Toast.LENGTH_SHORT).show();
@@ -79,7 +85,7 @@ public class Login extends Activity {
                     intent.putExtra("username", ls_username);
                     startActivity(intent);
                 }
-            }
+            }}
         });
         //-------------------
 
@@ -131,6 +137,16 @@ public class Login extends Activity {
         super.onStart();
     }
 
+    private boolean checkNetwork() {
+
+        ConnectivityManager manager = (ConnectivityManager) getSystemService(this.CONNECTIVITY_SERVICE);
+        NetworkInfo info = manager.getActiveNetworkInfo();
+
+        if (info != null && info.isConnected()) {
+            check=true;
+        }else check=false;
+        return check;
+    }
     private Boolean checkUsers(String user, String pass) {
 
         for (int i = 0; i < list_datausers.size(); i++) {
