@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -36,13 +38,12 @@ public class Login extends Activity {
     EditText username, password;
     String ls_username, ls_password;
     Button login ;
-    private boolean check ;
-    TextView start, tab_start , tab_Privacy ,Privacy , add_client , tab_add_client , tab_contact_us , tab_recordclients,tab_search;
+    TextView start, tab_start , tab_Privacy ,Privacy , Login, tab_login ,add_client , tab_add_client , tab_contact_us , tab_recordclients,tab_search;
 
     DatabaseReference databaseReference;
     List<DataUsers> list_datausers;
     private String databasename;
-    private int height_start , height_Privacy , height_add_client , height_contact_us , height_recordclients , height_search;
+    private int height_start , height_Privacy , height_Login, height_add_client , height_contact_us , height_recordclients , height_search;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -89,45 +90,17 @@ public class Login extends Activity {
 
                 startActivity(intent);*/
         //---------------
-
-    }
-
-    private void createDeclearLayout() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
-
-        View listViewClient = getLayoutInflater().inflate(R.layout.layout_phone, null);
-        start = (TextView) listViewClient.findViewById(R.id.start);
-        tab_start = (TextView) listViewClient.findViewById(R.id.tab_start);
-
-        Privacy = (TextView) listViewClient.findViewById(R.id.Privacy);
-        tab_Privacy = (TextView) listViewClient.findViewById(R.id.tab_Privacy);
-
-        add_client = (TextView) listViewClient.findViewById(R.id.add_client);
-        tab_add_client = (TextView) listViewClient.findViewById(R.id.tab_add_client);
-
-        tab_search = (TextView)listViewClient.findViewById(R.id.tab_search);
-
-        tab_recordclients=(TextView)listViewClient.findViewById(R.id.tab_record_client);
-
-        tab_contact_us=(TextView)listViewClient.findViewById(R.id.tab_contact_us);
-        builder.setNegativeButton("إغلاق", new DialogInterface.OnClickListener() {
+        FloatingActionButton fab = findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(DialogInterface dialogInterface, int i) {
-
-
+            public void onClick(View view) {
+              //  Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG).setAction("Action", null).show();
+                createDeclearLayout();
             }
-
         });
-        builder.setView(listViewClient);
-        AlertDialog alertDialog = builder.create();
-        alertDialog.show();
-
-        //----------- set height
-        setHeight();
-
-        //------------
-
     }
+
+
 
     private void setData() {
         ls_username = username.getText().toString();
@@ -197,10 +170,49 @@ public class Login extends Activity {
         builder.create().show();
     }
 
+    private void createDeclearLayout() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(Login.this);
+
+        View listViewClient = getLayoutInflater().inflate(R.layout.layout_phone, null);
+        start = (TextView) listViewClient.findViewById(R.id.start);
+        tab_start = (TextView) listViewClient.findViewById(R.id.tab_start);
+
+        Privacy = (TextView) listViewClient.findViewById(R.id.Privacy);
+        tab_Privacy = (TextView) listViewClient.findViewById(R.id.tab_Privacy);
+
+        Login = (TextView)listViewClient.findViewById(R.id.login);
+        tab_login = (TextView)listViewClient.findViewById(R.id.tab_login);
+
+        add_client = (TextView) listViewClient.findViewById(R.id.add_client);
+        tab_add_client = (TextView) listViewClient.findViewById(R.id.tab_add_client);
+
+        tab_search = (TextView)listViewClient.findViewById(R.id.tab_search);
+
+        tab_recordclients=(TextView)listViewClient.findViewById(R.id.tab_record_client);
+
+        tab_contact_us=(TextView)listViewClient.findViewById(R.id.tab_contact_us);
+        builder.setNegativeButton("إغلاق", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+
+            }
+
+        });
+        builder.setView(listViewClient);
+        AlertDialog alertDialog = builder.create();
+        alertDialog.show();
+
+        //----------- set height
+        setHeight();
+
+        //------------
+
+    }
     public void setHeight(){
         getHeight("S", tab_start.getHeight());
-        Log.d(TAG, "setHeight: "+tab_start.getHeight());
         getHeight("P", tab_Privacy.getHeight());
+        getHeight("L",tab_login.getHeight());
         getHeight("C", tab_add_client.getHeight());
         getHeight("R", tab_recordclients.getHeight());
         getHeight("search", tab_search.getHeight());
@@ -211,11 +223,13 @@ public class Login extends Activity {
     public void setHeightZero(){
         tab_start.setHeight(0);
         tab_Privacy.setHeight(0);
+        tab_login.setHeight(0);
         tab_add_client.setHeight(0);
         tab_search.setHeight(0);
         tab_recordclients.setHeight(0);
         tab_contact_us.setHeight(0);
     }
+
     private void getHeight(String s, int height) {
         if (height != 0) {
             switch (s) {
@@ -224,6 +238,9 @@ public class Login extends Activity {
                     break;
                 case "P":
                     height_Privacy = height;
+                    break;
+                case "L":
+                    height_Login = height;
                     break;
                 case "C":
                     height_add_client = height;
@@ -286,5 +303,12 @@ public class Login extends Activity {
         setHeightZero();
             tab_search.setHeight(height_search);
             // width , height
+    }
+
+    public void tablogin(View view) {
+        setHeight();
+        setHeightZero();
+        tab_login.setHeight(height_Login);
+        // width , height
     }
 }
