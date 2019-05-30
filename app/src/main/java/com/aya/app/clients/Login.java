@@ -65,7 +65,7 @@ public class Login extends Activity {
             @Override
             public void onClick(View view) {
                 setData();
-                if (checkNetwork()){
+                if (!checkNetwork()){
                  Snackbar.make(view, "عذرا, يجب الاتصال بالانترنت لتتمكن من تسجيل الدخول", Snackbar.LENGTH_LONG).setAction("Action", null).show();
 
                 }
